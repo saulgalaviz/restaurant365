@@ -10,7 +10,7 @@ public class CalculatorDriver
 {
 	public static void main(String[] args) 
 	{
-		String formattedString = "hjr,fsd,re";
+		String formattedString = "1\n2,3\n-6,4";
 		Calculator calc = new Calculator(formattedString);
 		
 		System.out.println(calc.Add());

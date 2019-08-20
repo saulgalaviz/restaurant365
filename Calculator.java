@@ -16,7 +16,7 @@ public class Calculator
 	//Constructor which formats our passed formatted string.
 	public Calculator(String formattedString)
 	{
-		String[] values = formattedString.split(",");
+		String[] values = formattedString.split("[,\\n]");
 		numbers = new ArrayList<>();
 		
 		int count = 0;
