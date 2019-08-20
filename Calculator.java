@@ -12,24 +12,55 @@ import java.util.ArrayList;
 public class Calculator 
 {
 	private List<Integer> numbers;
+	private List<Integer> negNumbers;
 	
 	//Constructor which formats our passed formatted string.
 	public Calculator(String formattedString)
 	{
 		String[] values = formattedString.split("[,\\n]");
 		numbers = new ArrayList<>();
+		negNumbers = new ArrayList<>();
 		
 		int count = 0;
 		
 		while(count < values.length)
 		{
 			if(isNumeric(values[count]))
-				numbers.add(Integer.parseInt(values[count]));
+			{
+				int number = Integer.parseInt(values[count]);
+				
+				if(0 > number)
+					negNumbers.add(number);
+				
+				else
+					numbers.add(number);
+			}
 			
 			else
 				numbers.add(0);
 			
 			count++;
+		}
+		
+		if(0 < negNumbers.size())
+		{
+			negativeValues();
+		}
+	}
+	
+	//Function which print negative values from formatted string.
+	private void negativeValues()
+	{
+		try {
+			String exceptionString = "";
+			
+			for(int negNumber : negNumbers)
+				exceptionString = exceptionString + negNumber + ',';
+			
+			throw new Exception("Negative numbers such as: " + exceptionString + " aren't allowed.");
+			
+		} catch (Exception e) {
+			System.err.println((e.getMessage() + "\n"));
 		}
 	}
 	
@@ -39,7 +70,7 @@ public class Calculator
 	    try {
 	        Integer.parseInt(value);
 	    } catch (NumberFormatException | NullPointerException nfe) {
-	        return false;
+	    	return false;
 	    }
 	    return true;
 	}

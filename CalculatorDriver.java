@@ -8,9 +8,9 @@ package R365;
  */
 public class CalculatorDriver 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
-		String formattedString = "1\n2,3\n-6,4";
+		String formattedString = "1\n2,3\n-6,4,-2,-6";
 		Calculator calc = new Calculator(formattedString);
 		
 		System.out.println(calc.Add());
