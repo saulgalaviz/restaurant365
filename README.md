@@ -5,6 +5,6 @@ Requirement Two - Completed
 Requirement Three - Completed   
 Requirement Four - Completed  
 Requirement Five - Completed  
-Requirement Six - Unfinished  
+Requirement Six - Completed 
 Requirement Seven - Unfinished  
 Requirement Eight - Unfinished  
