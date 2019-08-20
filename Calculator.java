@@ -21,7 +21,7 @@ public class Calculator
 		
 		int count = 0;
 		
-		while(count != 2 && count < values.length)
+		while(count < values.length)
 		{
 			if(isNumeric(values[count]))
 				numbers.add(Integer.parseInt(values[count]));
