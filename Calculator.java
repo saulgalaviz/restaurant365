@@ -32,7 +32,7 @@ public class Calculator
 				if(0 > number)
 					negNumbers.add(number);
 				
-				else
+				else if(number <= 1000)
 					numbers.add(number);
 			}
 			
