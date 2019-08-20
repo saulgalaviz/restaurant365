@@ -1,7 +1,7 @@
 #Restaurant365 Assessment
 -----------------------------------------------------------------------------------------------  
 Requirement One - Completed  
-Requirement Two - Unfinished  
+Requirement Two - Completed
 Requirement Three - Unfinished  
 Requirement Four - Unfinished  
 Requirement Five - Unfinished  
