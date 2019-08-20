@@ -17,7 +17,11 @@ public class Calculator
 	//Constructor which formats our passed formatted string.
 	public Calculator(String formattedString)
 	{
-		String[] values = formattedString.split("[,\\n]");
+		String delimiter = "[,\\n" + formattedString.charAt(2) + "]";
+		String newString = formattedString.substring(4);
+		
+		String[] values = newString.split(delimiter);
+		
 		numbers = new ArrayList<>();
 		negNumbers = new ArrayList<>();
 		
@@ -43,9 +47,8 @@ public class Calculator
 		}
 		
 		if(0 < negNumbers.size())
-		{
 			negativeValues();
-		}
+		
 	}
 	
 	//Function which print negative values from formatted string.
