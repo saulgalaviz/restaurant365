@@ -17,15 +17,39 @@ public class Calculator
 	//Constructor which formats our passed formatted string.
 	public Calculator(String formattedString)
 	{
-		String delimiter = "[,\\n" + formattedString.charAt(2) + "]";
-		String newString = formattedString.substring(4);
+		int count = 2;
+		String customDelimiter = "";
+		
+		while(formattedString.charAt(count) != '\n')
+		{
+			if(formattedString.charAt(count) != '[' && formattedString.charAt(count) != ']')
+			{
+				//Metacharacters needing an escape sequence.
+				if(formattedString.charAt(count) == '$' || formattedString.charAt(count) == '?' || formattedString.charAt(count) == '*' || formattedString.charAt(count) == '.') 
+					customDelimiter += "\\" + formattedString.charAt(count);
+				
+				else
+					customDelimiter += formattedString.charAt(count);
+			}
+		
+			count++;
+		}
+		String delimiter;
+		
+		if(customDelimiter.length() == 1)
+			delimiter = "[,\\n" + customDelimiter + "]";
+			
+		else
+			delimiter = customDelimiter + "|[,\\n]";
+		
+		String newString = formattedString.substring(formattedString.indexOf('\n') + 1);
 		
 		String[] values = newString.split(delimiter);
 		
 		numbers = new ArrayList<>();
 		negNumbers = new ArrayList<>();
 		
-		int count = 0;
+		count = 0;
 		
 		while(count < values.length)
 		{
@@ -85,7 +109,7 @@ public class Calculator
 		
 		for(int number : numbers)
 			sum += number;
-		
+			
 		return sum;
 	}
 }

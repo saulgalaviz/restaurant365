@@ -10,7 +10,7 @@ public class CalculatorDriver
 {
 	public static void main(String[] args)
 	{
-		String formattedString = "//;\n2;5\n8";
+		String formattedString = "//*\n11*22*33";
 		Calculator calc = new Calculator(formattedString);
 		
 		System.out.println(calc.Add());
