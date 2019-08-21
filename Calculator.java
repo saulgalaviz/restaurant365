@@ -17,62 +17,91 @@ public class Calculator
 	//Constructor which formats our passed formatted string.
 	public Calculator(String formattedString)
 	{
-		int count = 2;
-		String customDelimiter = "";
-		
-		while(formattedString.charAt(count) != '\n')
-		{
-			if(formattedString.charAt(count) != '[' && formattedString.charAt(count) != ']')
-			{
-				//Metacharacters needing an escape sequence.
-				if(formattedString.charAt(count) == '$' || formattedString.charAt(count) == '?' || formattedString.charAt(count) == '*' || formattedString.charAt(count) == '.') 
-					customDelimiter += "\\" + formattedString.charAt(count);
-				
-				else
-					customDelimiter += formattedString.charAt(count);
-			}
-		
-			count++;
-		}
-		String delimiter;
-		
-		if(customDelimiter.length() == 1)
-			delimiter = "[,\\n" + customDelimiter + "]";
-			
-		else
-			delimiter = customDelimiter + "|[,\\n]";
-		
-		String newString = formattedString.substring(formattedString.indexOf('\n') + 1);
-		
-		String[] values = newString.split(delimiter);
-		
+		int count = 2, countTwo = 0;
+		String delimiter = "", customDelimiter = "";
 		numbers = new ArrayList<>();
 		negNumbers = new ArrayList<>();
 		
-		count = 0;
-		
-		while(count < values.length)
+		//For requirement five.
+		if(formattedString.charAt(0) != '/')
 		{
-			if(isNumeric(values[count]))
+			String[] values = formattedString.split("[,\n]");
+			
+			while(countTwo < values.length)
 			{
-				int number = Integer.parseInt(values[count]);
+				if(isNumeric(values[countTwo]))
+				{
+					int number = Integer.parseInt(values[countTwo]);
+
+					if(0 > number)
+						negNumbers.add(number);
+
+					else if(number <= 1000)
+						numbers.add(number);
+				}
+
+				else
+					numbers.add(0);
+
+				countTwo++;
+			}
+		}
+		
+		//For requirement six through eight formats.
+		else
+		{
+			while(formattedString.charAt(count) != '\n')
+			{
+				if(formattedString.charAt(count) != '[' && formattedString.charAt(count) != ']')
+				{
+					//Metacharacters needing an escape sequence.
+					if(formattedString.charAt(count) == '$' || formattedString.charAt(count) == '?' || formattedString.charAt(count) == '*' || formattedString.charAt(count) == '.') 
+						customDelimiter += "\\" + formattedString.charAt(count);
+					
+					else
+						customDelimiter += formattedString.charAt(count);
+				}
 				
-				if(0 > number)
-					negNumbers.add(number);
-				
-				else if(number <= 1000)
-					numbers.add(number);
+				//Second case is incase we use a single character delimiter with no brackets.
+				if(formattedString.charAt(count) == ']' || formattedString.charAt(count + 1) == '\n')
+				{
+					delimiter += customDelimiter + '|';
+					
+					customDelimiter = "";
+				}
+				count++;
 			}
 			
-			else
-				numbers.add(0);
+			delimiter += "[,\\n]";
 			
-			count++;
+			String newString = formattedString.substring(formattedString.indexOf('\n') + 1);
+			
+			String[] values = newString.split(delimiter);
+			
+			count = 0;
+			
+			while(count < values.length)
+			{
+				if(isNumeric(values[count]))
+				{
+					int number = Integer.parseInt(values[count]);
+					
+					if(0 > number)
+						negNumbers.add(number);
+					
+					else if(number <= 1000)
+						numbers.add(number);
+				}
+				
+				else
+					numbers.add(0);
+				
+				count++;
+			}
 		}
 		
 		if(0 < negNumbers.size())
 			negativeValues();
-		
 	}
 	
 	//Function which print negative values from formatted string.
