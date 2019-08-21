@@ -135,10 +135,18 @@ public class Calculator
 	public int Add()
 	{
 		int sum = 0;
+		String formula = "";
 		
 		for(int number : numbers)
+		{
 			sum += number;
-			
+			formula += "+" + number;
+		}
+		
+		formula = formula.substring(1);
+		formula += " = " + sum;
+		System.out.println(formula);
+		
 		return sum;
 	}
 }
